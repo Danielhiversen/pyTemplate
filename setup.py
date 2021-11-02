@@ -1,11 +1,13 @@
-import sys
+import pathlib
 
+import pkg_resources
 from setuptools import setup
 
-install_requires = [
-    "aiohttp",
-    "async_timeout"
-]
+with pathlib.Path("requirements.txt").open() as requirements_txt:
+    install_requires = [
+        str(requirement)
+        for requirement in pkg_resources.parse_requirements(requirements_txt)
+    ]
 
 setup(
     name="NAME",
